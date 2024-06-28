@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Biblioteca.Models.Livro>
+
+<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Livros";
+}
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+<div class="py-2">
+    <h2 class="text-center">LIVROS</h2>
+</div>
+<div class="col-md-12">
+    <table class="table">
+        <thead >
+        <tr class="table-light ">
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor) (a)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPublicacao)
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Autor)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.Raw(item.DataPublicacao.ToString("d"))
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-sm btn-info me-2" asp-action="Details" asp-route-id="@item.LivroID"><i class="bi bi-info-lg"></i>Detalhes</a>
+                        <a class="btn btn-sm btn-warning  me-2" asp-action="Edit" asp-route-id="@item.LivroID"> <i class="bi bi-pencil-square"></i> Editar</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.LivroID"> <i class="bi bi-trash3-fill"></i> Deletar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-action="Create"> <i class="bi bi-plus-circle-dotted"></i> Cadastrar</a>
+</div>
+</body>
+</html>

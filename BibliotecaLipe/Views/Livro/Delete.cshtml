@@ -1,0 +1,38 @@
+@model Biblioteca.Models.Livro
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<title>Biblioteca - @ViewData["Title"]  </title>
+
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <h4 class="alert-heading">CUIDADO</h4>
+    <p class="mb-0">Você removerá o livro para sempre</p>
+</div>
+<div>
+    <div class="card mb-3">
+        <h3 class="card-header text-center">@Model.Titulo</h3>
+        <div class="card-body">
+            <h5 class="card-title">Titulo do Livro:</h5> <span>@Model.Titulo</span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Autor(a):</h5> <span>@Model.Autor</span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">ISBN:</h5> <span>@Model.ISBN</span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Categoria:</h5> <span>@Model.Categoria</span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Data de publicação:</h5> <span>@Model.DataPublicacao.ToString("d")</span>
+        </div>
+    </div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="LivroID"/>
+        <input type="submit" value="Confirmar" class="btn btn-danger"/> |
+        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+    </form>
+</div>

@@ -1,0 +1,67 @@
+﻿@using Biblioteca.Models.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Biblioteca.Models.Livro
+
+<!DOCTYPE html>
+@{
+ViewData["Title"] = "Editar";
+}
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+
+</head>
+<body>
+<div class="row">
+    <div class="col-md-4 py-2">
+        <form asp-action="Edit" enctype="multipart/form-data"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LivroID"/>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control"/>
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Autor" class="control-label"></label>
+                <input asp-for="Autor" class="form-control"/>
+                <span asp-validation-for="Autor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ISBN" class="form-label mt-4">ISBN</label>
+                <input asp-for="ISBN" type="text" class="form-control" placeholder="Digite o ISBN">
+            </div>
+            <div class="form-group">
+                <label asp-for="DataPublicacao" class="form-label mt-4">Date da publicação</label>
+                <input asp-for="DataPublicacao" type="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label asp-for="Categoria" class="form-label mt-4">Categorias</label>
+                <select class="form-select" asp-for="Categoria">
+                    @foreach (var categoria in Enum.GetValues(typeof(Categorias)))
+                    {
+                        <option value="@categoria">@categoria</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="form-label mt-4">Descrição do livro</label>
+                <textarea asp-for="Descricao" class="form-control"  rows="10"></textarea>
+            </div>
+            <div>
+                <label class="form-label mt-4">Capa do Livro</label>
+                <input  class="form-control" name="Imagem" type="file">
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success"/>
+                <a asp-action="Index" class="btn btn-primary">Voltar</a>
+            </div>
+    </div>
+</div>
+</body>
+</html>     
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

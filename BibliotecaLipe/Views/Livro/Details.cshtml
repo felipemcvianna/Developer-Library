@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Biblioteca.Models.Livro
+
+@{
+    ViewBag.Title = "Detalhes do Livro";
+    Layout = "_Layout";
+}
+
+<head>
+    <style>
+        .full-width-bg {
+            background-color: black;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .full-width-bg h2 {
+            color: white;
+        }
+
+        .center-content {
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            border: 5px solid #343a40;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-container {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="center-content">
+    <div class="container col-md-6">
+        <div class="row justify-content-center">
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="mb-0 mx-auto">@Model.Titulo</h1>
+                </div>
+                <div class="text-center">
+                    <img src="@Model.CaminhoImagem" alt="Capa do Harry Potter" class="img-fluid py-2" style="width: 40%; height: 400px;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Descrição</h5>
+                    <p>@Model.Descricao</p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">Autor(a): @Model.Autor</li>
+                    <li class="list-group-item">Data de publicação: @Model.DataPublicacao.ToString("d")</li>
+                    <li class="list-group-item">ISBN: @Model.ISBN</li>
+                </ul>
+                <div class="card-body text-center">
+                    <i class="bi bi-cart4 p-2 btn"> Adicionar ao carrinho</i>
+                    <i class="bi bi-heart btn"> Adicionar a lista de desejo</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+</div>
+</body>
