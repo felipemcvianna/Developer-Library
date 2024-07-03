@@ -16,7 +16,7 @@ namespace Biblioteca.Controllers
             _servicoLivros = servicoLivros;
             _caminhoServidor = servidor.WebRootPath;
         }
-        // GET
+        
         public IActionResult Index()
         {
             var todosOsLivros = _servicoLivros.GetAllLivros();

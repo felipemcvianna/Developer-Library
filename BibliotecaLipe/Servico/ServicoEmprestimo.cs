@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Data;
 using Biblioteca.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Servico;
@@ -13,16 +14,17 @@ public class ServicoEmprestimo
         _context = context;
     }
 
-    public IList<Emprestimo> GetAllEmprestimos()
+    public IList<Emprestimo> GetAllEmprestimosByUser(string id)
     {
         return _context.Emprestimos
-            .Include(x => x.Livro)
-            .Include(x => x.Livro).ToList();
+            .Include(x => x.Usuario)
+            .Include(x => x.Livro).Where(x => x.Usuario.Id == id).ToList();
     }
+
     public Emprestimo? GetEmprestimosById(int id)
     {
         return _context.Emprestimos
-            .Include(x => x.Livro)
+            .Include(x => x.Usuario)
             .Include(x => x.Livro)
             .FirstOrDefault(x => x.EmprestimoId == id);
     }

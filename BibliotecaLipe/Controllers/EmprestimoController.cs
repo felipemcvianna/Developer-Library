@@ -1,38 +1,79 @@
-﻿using Biblioteca.Models;
+﻿using System.Security.Claims;
+using Biblioteca.Data;
+using Biblioteca.Models;
 using Biblioteca.Servico;
+using BibliotecaLipe.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers;
+
 [Authorize]
 public class EmprestimoController : Controller
 {
     private readonly ServicoEmprestimo _servicoEmprestimo;
+    private readonly BibliotecaDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public EmprestimoController(ServicoEmprestimo servicoEmprestimo)
+    public EmprestimoController(ServicoEmprestimo servicoEmprestimo, BibliotecaDbContext context,
+        UserManager<IdentityUser> userManager)
     {
         _servicoEmprestimo = servicoEmprestimo;
+        _context = context;
+        _userManager = userManager;
     }
-
     [HttpGet]
     public IActionResult Index()
     {
-        IList<Emprestimo> list = _servicoEmprestimo.GetAllEmprestimos();
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        IList<Emprestimo> list = _servicoEmprestimo.GetAllEmprestimosByUser(userId);
         return View(list);
     }
 
+
     [HttpGet]
-    public IActionResult Create()
+    public IActionResult Create(int livroId)
     {
-        return View();
+        var livro = _context.Livros.FirstOrDefault(x => x.LivroID == livroId);
+        if (livro == null)
+        {
+            return NotFound("Não foi possível encontrar o livro");
+        }
+
+        LivroEmprestimoViewModel livroEmprestimo = new()
+        {
+            Livro = livro,
+            Emprestimo = new Emprestimo
+            {
+                LivroId = livro.LivroID
+            }
+        };
+
+        return View(livroEmprestimo);
     }
 
     [HttpPost]
-    public IActionResult Create(Emprestimo emprestimo)
+    public async Task<IActionResult> Create(LivroEmprestimoViewModel emprestimoViewModel)
     {
-        _servicoEmprestimo.Create(emprestimo);
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return Challenge();
+        }
+
+        if (emprestimoViewModel.Emprestimo.DataDevolucao < DateTime.Today)
+        {
+            ModelState.AddModelError("Emprestimo.DataDevolucao", "A data de devolução não pode ser anterior à data atual.");
+            return View(emprestimoViewModel);
+        }
+
+        emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
+
+        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
         return RedirectToAction(nameof(Index));
     }
+
 
     [HttpGet]
     public IActionResult Edit(int id)
@@ -72,7 +113,7 @@ public class EmprestimoController : Controller
         var EmprestimoRemove = _servicoEmprestimo.GetEmprestimosById(id);
         return View(EmprestimoRemove);
     }
-    
+
     [HttpPost]
     public IActionResult Remove(Emprestimo emprestimo)
     {
