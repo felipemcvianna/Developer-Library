@@ -34,7 +34,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Livro");
+                return RedirectToAction("Index", "Home");
             }
 
             foreach (var error in result.Errors)
@@ -73,6 +73,6 @@ public class AccountController : Controller
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction("index", "Home");
+        return RedirectToAction("Login", "Account");
     }
 }

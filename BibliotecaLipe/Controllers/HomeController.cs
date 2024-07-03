@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaDev.Controllers;
+
 [Authorize]
 public class HomeController : Controller
 {
@@ -17,12 +18,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        if (_signInManager.IsSignedIn(User))
-        {
-            return View();
-        }
-
-        return RedirectToAction("Login", "Account");
+        return View();
     }
 
     public IActionResult Privacy()

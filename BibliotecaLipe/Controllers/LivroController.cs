@@ -1,8 +1,7 @@
-﻿using Biblioteca.Models;
+using Biblioteca.Models;
 using Biblioteca.Servico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace Biblioteca.Controllers
 {
@@ -17,7 +16,6 @@ namespace Biblioteca.Controllers
             _servicoLivros = servicoLivros;
             _caminhoServidor = servidor.WebRootPath;
         }
-
         // GET
         public IActionResult Index()
         {
@@ -25,12 +23,14 @@ namespace Biblioteca.Controllers
             return View(todosOsLivros);
         }
 
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             return View();
         }
-
+        
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create(Livro livro, IFormFile? imagem)
         {
             if (ModelState.IsValid)
@@ -42,9 +42,8 @@ namespace Biblioteca.Controllers
 
             return View();
         }
-
-
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Edit(int? id)
         {
             var livro = _servicoLivros.GetLivroById(id.Value);
@@ -57,6 +56,7 @@ namespace Biblioteca.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Edit(Livro livro, IFormFile? imagem)
         {
             try
@@ -68,6 +68,13 @@ namespace Biblioteca.Controllers
                     {
                         return NotFound("Livro não encontrado.");
                     }
+                    
+                    livroExistente.Titulo = livro.Titulo;
+                    livroExistente.Autor = livro.Autor;
+                    livroExistente.ISBN = livro.ISBN;
+                    livroExistente.DataPublicacao = livro.DataPublicacao;
+                    livroExistente.Categoria = livro.Categoria;
+                    livroExistente.Descricao = livro.Descricao;
 
                     if (imagem != null)
                     {
@@ -75,18 +82,23 @@ namespace Biblioteca.Controllers
                     }
 
                     _servicoLivros.Edit(livroExistente);
-                }
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch (Exception ex)
             {
                 return BadRequest("Erro ao editar livro: " + ex.Message);
             }
+
+            return View(livro);
         }
 
 
+
+        
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Delete(int? id)
         {
             var livroRemover = _servicoLivros.GetLivroById(id.Value);
@@ -95,6 +107,7 @@ namespace Biblioteca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Delete(int id)
         {
             var livroRemover = _servicoLivros.GetLivroById(id);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BibliotecaLipe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b09e716549d5c5e0e8bfe068a115ba1e73eb9d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BibliotecaLipe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BibliotecaLipe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

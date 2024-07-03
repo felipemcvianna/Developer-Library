@@ -1,4 +1,4 @@
-﻿@using Biblioteca.Models
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Biblioteca.Models.RegisterViewModel
 
 
@@ -10,22 +10,23 @@
             <label asp-for="Nome">Usuário</label>
             <input asp-for="Nome" type="tel" class="form-control">
         </div>
+        
         <div class="form-group">
             <label asp-for="Email">Email</label>
             <input asp-for="Email" type="email" class="form-control">
-
         </div>
 
         <div class="form-group">
             <label asp-for="Password">Senha</label>
             <input asp-for="Password" type="password" class="form-control">
-
         </div>
+        
         <div class="form-group">
             <label asp-for="ConfirmaPassword" class="form-label mt-4">@Html.DisplayNameFor(x => x.ConfirmaPassword)</label>
             <input asp-for="ConfirmaPassword" type="password" class="form-control">
             <span asp-validation-for="ConfirmaPassword" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+        <button asp-action="Login" class="btn btn-success mt-3">Login</button>
     </form>
 </div>
