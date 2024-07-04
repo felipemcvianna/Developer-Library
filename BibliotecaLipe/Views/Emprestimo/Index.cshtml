@@ -24,49 +24,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach (var emprestimo in Model)
-                    {
-                        if (emprestimo.Status == Status.Ativo)
-                        {
-                            <tr>
-                                <td>@emprestimo.Livro.Titulo</td>
-                                <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                                <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                                <td>@emprestimo.Status</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Detalhes</button>
-                                    <button class="btn btn-success btn-sm">Devolver</button>
-                                </td>
-                            </tr>
-                        }
-
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-dark">
-            <h2 class="mb-0 text-center text-white">Emprestimos Devolvidos</h2>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Livro</th>
-                    <th>Data de Empréstimo</th>
-                    <th>Data de Devolução</th>
-                    <th>Estatus</th>
-                </tr>
-                </thead>
-                <tbody>
-
                 @foreach (var emprestimo in Model)
                 {
-                    if (emprestimo.Status == Status.Encerrado)
+                    if (emprestimo.Status == Status.Ativo)
                     {
                         <tr>
                             <td>@emprestimo.Livro.Titulo</td>
@@ -74,13 +34,24 @@
                             <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
                             <td>@emprestimo.Status</td>
                             <td>
-                                <button class="btn btn-primary btn-sm">Detalhes</button>
-                                <button class="btn btn-success btn-sm">Devolver</button>
+                                <form asp-action="Edit" method="post">
+                                    <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                    <button type="submit" class="btn btn-success btn-sm">Devolver</button>
+                                </form>
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <form asp-action="Remove" method="post">
+                                        <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                        <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                    </form>
+                                }
                             </td>
                         </tr>
                     }
-               
                 }
+
                 </tbody>
             </table>
         </div>
@@ -95,37 +66,80 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Livro</th>
+                    <th>Titulo</th>
                     <th>Data de Empréstimo</th>
                     <th>Data de Devolução</th>
                     <th>Estatus</th>
                 </tr>
                 </thead>
                 <tbody>
-
                 @foreach (var emprestimo in Model)
                 {
-                if (emprestimo.Status == Status.Vencido)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Detalhes</button>
-                        <button class="btn btn-success btn-sm">Devolver</button>
-                    </td>
-                </tr>
+                    if (emprestimo.Status == Status.Vencido)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                            <td>
+                                <form asp-action="Edit" method="post">
+                                    <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                    <button type="submit" class="btn btn-success btn-sm">Devolver</button>
+                                </form>
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <form asp-action="Remove" method="post">
+                                        <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                        <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-dark">
+            <h2 class="mb-0 text-center text-white">Emprestimos Devolvidos</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Data de Empréstimo</th>
+                    <th>Data de Devolução</th>
+                    <th>Estatus</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var emprestimo in Model)
+                {
+                    if (emprestimo.Status == Status.Encerrado)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 <div class="container mt-5">
     <div class="card">
         <div class="card-header bg-dark">
@@ -135,8 +149,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Livro</th>
+                    <th>Titulo</th>
                     <th>Data de Empréstimo</th>
                     <th>Data de Devolução</th>
                     <th>Estatus</th>
@@ -145,20 +158,22 @@
                 <tbody>
                 @foreach (var emprestimo in Model)
                 {
-                if (emprestimo.Status == Status.Cancelado)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Detalhes</button>
-                        <button class="btn btn-success btn-sm">Devolver</button>
-                    </td>
-                </tr>
-                }
-
+                    if (emprestimo.Status == Status.Cancelado)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                            <td>
+                                <button class="btn btn-success btn-sm">Realizar emprestimo</button>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <button class="btn btn-danger btn-sm">Excluir</button>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>

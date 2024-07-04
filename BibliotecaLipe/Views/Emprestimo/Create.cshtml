@@ -4,48 +4,63 @@
 <html lang="pt-br">
 <head>
     <title>Criar Empréstimo</title>
+    <title>@ViewData["Title"]</title>
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .card-body img {
+            object-fit: cover;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
+
 <div>
-    <div class="text-center">
-        <h1>Detalhes do Livro</h1>
-        <div>
-            <label>Título:</label>
-            <span>@Model.Livro.Titulo</span>
-        </div>
-        <div>
-            <label>Autor:</label>
-            <span>@Model.Livro.Autor</span>
-        </div>
-        <div>
-            <label>Data de Publicação:</label>
-            <span>@Model.Livro.DataPublicacao.ToString("d")</span>
-        </div>
-        <div>
-            <label>ISBN:</label>
-            <span>@Model.Livro.ISBN</span>
-        </div>
-        <hr/>
-        <h2>Criar Empréstimo</h2>
-        <form asp-action="Create" method="post">
-            <input type="hidden" asp-for="Emprestimo.LivroId"/>
-            <div>
-                <div>
-                    <label asp-for="Emprestimo.Status" class="form-label mt-4">Status</label>
-                    <select class="form-select" asp-for="Emprestimo.Status">
-                        @foreach (var status in Enum.GetValues(typeof(Biblioteca.Models.Enums.Status)))
-                        {
-                        <option value="@status">@status</option>
-                        }
-                    </select>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <!-- Card do livro -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@Model.Livro.Titulo</h5>
+                        <img src="@Model.Livro.CaminhoImagem" alt="Capa do livro" class="img-fluid py-2" style="width: 33%; height: 200px;">
+                        <p class="card-text">Autor:</p>
+                        <p>@Model.Livro.Autor</p>
+                    </div>
                 </div>
-                <label asp-for="Emprestimo.DataDevolucao" class="form-label mt-4">Data de Devolução</label>
-                <input asp-for="Emprestimo.DataDevolucao" type="date" class="form-control"/>
-                <span asp-validation-for="Emprestimo.DataDevolucao" class="text-danger"></span>
             </div>
-            <input type="submit" value="Realizar Empréstimo" class="btn btn-success">
-        </form>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="text-center">Você deverá devolver até a seguinte data:</h4>
+                        <form asp-action="Create" method="post">
+                            <input type="hidden" asp-for="Emprestimo.LivroId"/>
+                            <div>
+                                <label asp-for="Emprestimo.DataDevolucao" class="form-label mt-4">Data de Devolução:</label>
+                                <input asp-for="Emprestimo.DataDevolucao" type="date" class="form-control" readonly="readonly"/>
+                                <span asp-validation-for="Emprestimo.DataDevolucao" class="text-danger"></span>
+                            </div>
+                        </form>
+                        <div class="text-center mt-4">
+                            <a class="btn btn-primary" asp-controller="Livro" asp-action="Details" asp-route-id="@Model.Livro.LivroID"> Voltar</a>
+                            <input type="submit" value="Confirmar emprestimo" class="btn btn-success">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

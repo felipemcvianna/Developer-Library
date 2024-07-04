@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Biblioteca.Data;
 using Biblioteca.Models;
+using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
 using BibliotecaLipe.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -23,11 +24,20 @@ public class EmprestimoController : Controller
         _context = context;
         _userManager = userManager;
     }
+
     [HttpGet]
     public IActionResult Index()
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         IList<Emprestimo> list = _servicoEmprestimo.GetAllEmprestimosByUser(userId);
+        foreach (var emprestimo in list)
+        {
+            if (emprestimo.DataDevolucao < DateTime.Now && emprestimo.Status != Status.Encerrado)
+            {
+                emprestimo.Status = Status.Vencido;
+            }
+        }
+
         return View(list);
     }
 
@@ -49,7 +59,6 @@ public class EmprestimoController : Controller
                 LivroId = livro.LivroID
             }
         };
-
         return View(livroEmprestimo);
     }
 
@@ -64,63 +73,48 @@ public class EmprestimoController : Controller
 
         if (emprestimoViewModel.Emprestimo.DataDevolucao < DateTime.Today)
         {
-            ModelState.AddModelError("Emprestimo.DataDevolucao", "A data de devolução não pode ser anterior à data atual.");
-            return View(emprestimoViewModel);
+            ModelState.AddModelError(emprestimoViewModel.Emprestimo.DataDevolucao.ToString(),
+                "A data de devolução não pode ser anterior à data atual.");
         }
 
         emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
-
+        emprestimoViewModel.Emprestimo.Status = Status.Ativo;
         _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
         return RedirectToAction(nameof(Index));
     }
 
 
-    [HttpGet]
+    [HttpPost]
     public IActionResult Edit(int id)
     {
-        var EmprestimoEdit = _servicoEmprestimo.GetEmprestimosById(id);
-        if (EmprestimoEdit == null)
+        var emprestimoExistente = _servicoEmprestimo.GetEmprestimosById(id);
+        if (emprestimoExistente == null)
         {
             return BadRequest("Emprestimo não encontrado");
         }
 
-        return View(EmprestimoEdit);
-    }
-
-    [HttpPost]
-    public IActionResult Edit(int id, Emprestimo emprestimo)
-    {
-        if (id != emprestimo.EmprestimoId)
-        {
-            return BadRequest("Não foi possível editar o emprestimo. Ids diferentes");
-        }
-
-        if (ModelState.IsValid)
-        {
-            var EmprestimoExistente = _servicoEmprestimo.GetEmprestimosById(emprestimo.EmprestimoId);
-            if (EmprestimoExistente != null)
-            {
-                _servicoEmprestimo.Update(EmprestimoExistente);
-            }
-        }
+        _servicoEmprestimo.Update(emprestimoExistente);
 
         return RedirectToAction(nameof(Index));
     }
 
-    [HttpGet]
+
+    [HttpPost]
     public IActionResult Remove(int id)
     {
-        var EmprestimoRemove = _servicoEmprestimo.GetEmprestimosById(id);
-        return View(EmprestimoRemove);
-    }
+        if (!ModelState.IsValid)
+        {
+            return BadRequest("model state não é valido");
+        }
 
-    [HttpPost]
-    public IActionResult Remove(Emprestimo emprestimo)
-    {
-        var emprestimoRemove = _servicoEmprestimo.GetEmprestimosById(emprestimo.EmprestimoId);
-        if (emprestimoRemove != null)
-            _servicoEmprestimo.Delete(emprestimoRemove.EmprestimoId);
-        return RedirectToAction(nameof(Index));
+        var emprestimoARemover = _servicoEmprestimo.GetEmprestimosById(id);
+        if (emprestimoARemover != null)
+        {
+            _servicoEmprestimo.Delete(emprestimoARemover.EmprestimoId);
+            return RedirectToAction(nameof(Index));
+        }
+
+        return BadRequest("Não foi possível localizar o emprestimo");
     }
 
     public IActionResult Details(int id)

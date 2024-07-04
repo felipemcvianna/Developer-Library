@@ -82,7 +82,7 @@
     </div>
     <br/>
     <br/>
-    <a asp-action="Index" class="btn btn-success">Voltar</a>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
     @if (User.IsInRole("Administrador"))
     {
         <a class="btn btn-warning " asp-action="Edit" asp-route-id="@Model.LivroID">
@@ -95,6 +95,6 @@
             </i> Excluir
         </a>
     }
-    <a asp-controller="Emprestimo" asp-action="Create" asp-route-livroId="@Model.LivroID" class="btn btn-primary">Pegar Empréstimo</a>
+    <a asp-controller="Emprestimo" asp-action="Create" asp-route-livroId="@Model.LivroID" class="btn btn-success">Pegar Empréstimo</a>
 </div>
 </body>

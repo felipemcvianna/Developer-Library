@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light" >
         <div class="container-fluid">
             <h4 class="navbar-brand">Biblioteca do lipe</h4>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,50 +24,50 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Home")">
+                            <a class="nav-link text-black" href="@Url.Action("Index", "Home")">
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
                         @if (!User.IsInRole("Administrador"))
                         {
-                            <ul class="nav nav-pills flex-column">
+                            <ul class="nav nav-pills flex-column ">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="true">Livros</a>
+                                    <a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="true">Livros</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "Livro")"> Página inicial</a>
-                                        <a class="dropdown-item" href="@Url.Action("Index", "Home")">Ficção</a>
-                                        <a class="dropdown-item">Não Ficção</a>
-                                        <a class="dropdown-item">Ciência</a>
-                                        <a class="dropdown-item">História</a>
-                                        <a class="dropdown-item">Bibliografia</a>
-                                        <a class="dropdown-item">Fantasia</a>
-                                        <a class="dropdown-item">Romance</a>
-                                        <a class="dropdown-item">Ação</a>
-                                        <a class="dropdown-item">Auto Ajuda</a>
+                                        <a class="dropdown-item text-black" href="@Url.Action("Index", "Livro")"> Página inicial</a>
+                                        <a class="dropdown-item text-black" href="@Url.Action("Index", "Home")">Ficção</a>
+                                        <a class="dropdown-item text-black">Não Ficção</a>
+                                        <a class="dropdown-item text-black">Ciência</a>
+                                        <a class="dropdown-item text-black">História</a>
+                                        <a class="dropdown-item text-black">Bibliografia</a>
+                                        <a class="dropdown-item text-black">Fantasia</a>
+                                        <a class="dropdown-item text-black">Romance</a>
+                                        <a class="dropdown-item text-black">Ação</a>
+                                        <a class="dropdown-item text-black">Auto Ajuda</a>
                                     </div>
                                 </li>
                             </ul>
                             
                         }
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Emprestimo")" class="nav-link">Emprestimos</a>
+                            <a href="@Url.Action("Index", "Emprestimo")" class="nav-link text-black">Emprestimos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action()">Meu Perfil</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-black" href="@Url.Action()">Meu Perfil</a>
                         </li>
                         @if (User.IsInRole("Administrador"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
                                 <div class="dropdown-menu">
-                                    <a href="@Url.Action("Index", "Livro")" class="dropdown-item">Livros</a>
-                                    <a href="@Url.Action("Index", "Emprestimo")" class="dropdown-item">Emprestimos</a>
+                                    <a href="@Url.Action("Index", "Livro")" class="dropdown-item text-black">Livros</a>
+                                    <a href="@Url.Action("Index", "Emprestimo")" class="dropdown-item text-black">Emprestimos</a>
                                 </div>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link text-black" href="#">About</a>
                         </li>
 
                     </ul>

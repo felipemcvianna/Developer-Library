@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Data;
 using Biblioteca.Models;
+using Biblioteca.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +40,7 @@ public class ServicoEmprestimo
     {
         if (_context.Emprestimos.Any(x => x.EmprestimoId == emprestimo.EmprestimoId))
         {
+            TrocarStatus(emprestimo);
             _context.Emprestimos.Update(emprestimo);
             _context.SaveChanges();
         }
@@ -48,6 +50,16 @@ public class ServicoEmprestimo
     {
         var EmprestimoRemover = _context.Emprestimos.FirstOrDefault(x => x.EmprestimoId == id);
         if (EmprestimoRemover != null)
+        {
             _context.Emprestimos.Remove(EmprestimoRemover);
+            _context.SaveChanges();
+        }
+    }
+    private void TrocarStatus(Emprestimo emprestimo)
+    {
+        if (emprestimo.Status == Status.Ativo || emprestimo.Status == Status.Vencido)
+        {
+            emprestimo.Status = Status.Encerrado;
+        }
     }
 }

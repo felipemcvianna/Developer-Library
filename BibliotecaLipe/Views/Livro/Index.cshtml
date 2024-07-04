@@ -3,7 +3,8 @@
 
 <!DOCTYPE html>
 @{
-ViewData["Title"] = "Livros";
+    ViewData["Title"] = "Livros";
+    var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
 }
 <html>
 <head>
@@ -33,12 +34,12 @@ ViewData["Title"] = "Livros";
         </button>
     </div>
 </div>
-<h3 class="text-center">TOP 10 LIVROS DA SEMANA</h3>
+<h3 class="text-center">TOP 10 LIVROS</h3>
 <div>
     <section class="py-5">
         <div class="container">
             <div class="row text-center">
-                @foreach (var book in Model)
+                @foreach (var book in topLivros)
                 {
                     <div class="col-md-2 mb-4">
                         <div class="card h-100"
