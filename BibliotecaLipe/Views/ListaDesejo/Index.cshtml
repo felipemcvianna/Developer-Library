@@ -23,7 +23,7 @@
             padding: 1rem;
         }
         .wishlist-item img {
-            max-height: 150px;
+            max-height: 170px;
             margin-right: 1rem;
         }
         .wishlist-item-title {
@@ -65,26 +65,27 @@
     <div class="wishlist-items row">
         @foreach (var livro in Model.Livros)
         {
-            <div class="wishlist-item col-md-6 d-flex">
+            <div class="wishlist-item col-md-4 d-flex">
                 <img src="@livro.CaminhoImagem" alt="Capa do Livro">
                 <div class="wishlist-item-details">
                     <div class="wishlist-item-title">@livro.Titulo</div>
                     <div class="wishlist-item-author">por @livro.Autor</div>
                     <div>Publicado em: @livro.DataPublicacao.ToString("dd/MM/yyyy")</div>
                     <div>ISBN: @livro.ISBN</div>
+                    <div class="button-container ">
+                        <form asp-controller="Emprestimo" asp-action="Create" method="get">
+                            <input type="hidden" name="Livroid" value="@livro.LivroID">
+                            <button type="submit" class="Pegar-button">Emprestimo</button>
+                        </form>
+                        <form asp-controller="ListaDesejo" asp-action="Remove" method="post">
+                            <input type="hidden" name="Livroid" value="@livro.LivroID">
+                            <button type="submit" class="remove-button mt-1">Remover</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="button-container ">
-                    <form asp-controller="Emprestimo" asp-action="Create" method="get">
-                        <input type="hidden" name="Livroid" value="@livro.LivroID">
-                        <button type="submit" class="Pegar-button">Emprestimo</button>
-                    </form>
-                    
-                    <form asp-controller="ListaDesejo" asp-action="Remove" method="post">
-                        <input type="hidden" name="Livroid" value="@livro.LivroID">
-                        <button type="submit" class="remove-button mt-1">Remover</button>
-                    </form>
-                </div>
+                
             </div>
+            
         }
     </div>
 </div>

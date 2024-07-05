@@ -14,6 +14,5 @@ public class Livro
     public string Descricao { get; set; }
     public string? CaminhoImagem { get; set; }
     public ICollection<Emprestimo> Emprestimos { get; set; } = new List<Emprestimo>();
-
     [NotMapped] public int QuantidadeEmprestado => Emprestimos.Count;
 }

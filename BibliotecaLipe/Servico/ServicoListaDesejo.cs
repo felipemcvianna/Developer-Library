@@ -13,7 +13,7 @@ public class ServicoListaDesejo
         _context = context;
     }
 
-    public ListaDesejo GetAllListaDesejo(string id)
+    public ListaDesejo? GetAllListaDesejo(string id)
     {
         return _context.ListaDesejos
             .Include(x => x.Livros)
@@ -21,13 +21,6 @@ public class ServicoListaDesejo
             .FirstOrDefault(x => x.UsuarioId == id);
     }
 
-
-
-    // public void Create(ListaDesejo listaDesejo)
-    // {
-    //     _context.ListaDesejos.Add(listaDesejo);
-    //     _context.SaveChanges();
-    // }
 
     public void AddLivroLista(Livro livro, string id)
     {
@@ -42,9 +35,25 @@ public class ServicoListaDesejo
             throw new ArgumentNullException("Não foi possível encontrar a lista de desejo");
         }
 
-        if (!listaDesejo.Livros.Any(x => x.ISBN == livro.ISBN))
+        if (listaDesejo.Livros.All(x => x.LivroID != livro.LivroID))
         {
             listaDesejo.Livros.Add(livro);
+            Update(listaDesejo);
+        }
+    }
+
+    public void Remove(string IdUusuario, int livroId)
+    {
+        ListaDesejo? listaDesejo = GetAllListaDesejo(IdUusuario);
+        if (listaDesejo == null)
+        {
+            return;
+        }
+
+        var LivroARemover = listaDesejo.Livros.FirstOrDefault(x => x.LivroID == livroId);
+        if (LivroARemover != null)
+        {
+            listaDesejo.Livros.Remove(LivroARemover);
             Update(listaDesejo);
         }
     }

@@ -64,4 +64,17 @@ public class ListaDesejoController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Remove(int livroId)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return Challenge();
+        }
+        _servicoListaDesejo.Remove(user.Id, livroId);
+
+        return RedirectToAction("Index");
+    }
+
 }

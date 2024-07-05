@@ -9,12 +9,9 @@ namespace Biblioteca.Servico;
 public class ServicoEmprestimo
 {
     private readonly BibliotecaDbContext _context;
-    
-
-    public ServicoEmprestimo(BibliotecaDbContext context)
+    public ServicoEmprestimo(BibliotecaDbContext context, Logger<ServicoEmprestimo> logger)
     {
         _context = context;
-        
     }
 
     public IList<Emprestimo> GetAllEmprestimosByUser(string id)
@@ -40,11 +37,9 @@ public class ServicoEmprestimo
 
         if (emprestimosUsuario.Count == 0)
         {
-            
             emprestimo.Status = Status.Ativo;
             _context.Emprestimos.Add(emprestimo);
             _context.SaveChanges();
-            
         }
         else
         {
@@ -70,6 +65,13 @@ public class ServicoEmprestimo
             _context.SaveChanges();
         }
     }
+    private void TrocarStatus(Emprestimo emprestimo)
+    {
+        if (emprestimo.Status == Status.Ativo || emprestimo.Status == Status.Vencido)
+        {
+            emprestimo.Status = Status.Encerrado;
+        }
+    }
 
     public void Delete(int id)
     {
@@ -78,14 +80,6 @@ public class ServicoEmprestimo
         {
             _context.Emprestimos.Remove(EmprestimoRemover);
             _context.SaveChanges();
-        }
-    }
-
-    private void TrocarStatus(Emprestimo emprestimo)
-    {
-        if (emprestimo.Status == Status.Ativo || emprestimo.Status == Status.Vencido)
-        {
-            emprestimo.Status = Status.Encerrado;
         }
     }
 }

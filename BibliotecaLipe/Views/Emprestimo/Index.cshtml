@@ -17,7 +17,7 @@
     <h2 class="text-center">Empréstimos</h2>
     <div style="display: flex; align-items: center;">
         <input type="text" placeholder="Pesquisar emprestimos..."
-               style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; width: 300px;">
+               style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
         <button
             style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
             <i class="bi bi-search"></i>
@@ -41,30 +41,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var emprestimo in Model.OrderByDescending(x=> x.DataEmprestimo))
+                @foreach (var emprestimo in Model.OrderByDescending(x => x.DataEmprestimo))
                 {
-                if (emprestimo.Status == Status.Ativo)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                    <td>
-                        <form asp-action="Edit" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
-                            <button type="submit" class="btn btn-success btn-sm">Devolver</button>
-                        </form>
-                        @if (User.IsInRole("Administrador"))
-                        {
-                        <form asp-action="Remove" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
-                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                        </form>
-                        }
-                    </td>
-                </tr>
-                }
+                    if (emprestimo.Status == Status.Ativo)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                            <td>
+                                <form asp-action="Edit" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                    <button type="submit" class="btn btn-success btn-sm">Devolver</button>
+                                </form>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <form asp-action="Remove" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                        <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>
@@ -88,30 +88,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var emprestimo in Model.OrderByDescending(x=> x.DataEmprestimo))
+                @foreach (var emprestimo in Model.OrderByDescending(x => x.DataEmprestimo))
                 {
-                if (emprestimo.Status == Status.Vencido)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                    <td>
-                        <form asp-action="Edit" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
-                            <button type="submit" class="btn btn-success btn-sm">Devolver</button>
-                        </form>
-                        @if (User.IsInRole("Administrador"))
-                        {
-                        <form asp-action="Remove" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
-                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                        </form>
-                        }
-                    </td>
-                </tr>
-                }
+                    if (emprestimo.Status == Status.Vencido)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                            <td>
+                                <form asp-action="Edit" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                    <button type="submit" class="btn btn-success btn-sm">Devolver</button>
+                                </form>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <form asp-action="Remove" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@emprestimo.EmprestimoId"/>
+                                        <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>
@@ -134,17 +134,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var emprestimo in Model.OrderByDescending(x=> x.DataEmprestimo))
+                @foreach (var emprestimo in Model.OrderByDescending(x => x.DataEmprestimo))
                 {
-                if (emprestimo.Status == Status.Encerrado)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                </tr>
-                }
+                    if (emprestimo.Status == Status.Encerrado)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>
@@ -168,24 +168,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var emprestimo in Model.OrderByDescending(x=> x.DataEmprestimo))
+                @foreach (var emprestimo in Model.OrderByDescending(x => x.DataEmprestimo))
                 {
-                if (emprestimo.Status == Status.Cancelado)
-                {
-                <tr>
-                    <td>@emprestimo.Livro.Titulo</td>
-                    <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
-                    <td>@emprestimo.Status</td>
-                    <td>
-                        <button class="btn btn-success btn-sm">Realizar empréstimo</button>
-                        @if (User.IsInRole("Administrador"))
-                        {
-                        <button class="btn btn-danger btn-sm">Excluir</button>
-                        }
-                    </td>
-                </tr>
-                }
+                    if (emprestimo.Status == Status.Cancelado)
+                    {
+                        <tr>
+                            <td>@emprestimo.Livro.Titulo</td>
+                            <td>@emprestimo.DataEmprestimo.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.DataDevolucao.ToString("dd/MM/yyyy")</td>
+                            <td>@emprestimo.Status</td>
+                            <td>
+                                <button class="btn btn-success btn-sm">Realizar empréstimo</button>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <button class="btn btn-danger btn-sm">Excluir</button>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>

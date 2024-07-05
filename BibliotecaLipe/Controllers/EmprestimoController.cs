@@ -69,14 +69,13 @@ public class EmprestimoController : Controller
         {
             return Challenge();
         }
-
         if (emprestimoViewModel.Emprestimo.DataDevolucao < DateTime.Today)
         {
             ModelState.AddModelError(emprestimoViewModel.Emprestimo.DataDevolucao.ToString(),
                 "A data de devolução não pode ser anterior à data atual.");
         }
         emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
-        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo); ;
+        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
         return RedirectToAction(nameof(Index));
     }
 
@@ -112,13 +111,5 @@ public class EmprestimoController : Controller
         }
 
         return BadRequest("Não foi possível localizar o emprestimo");
-    }
-
-    public IActionResult Details(int id)
-    {
-        var emprestimoDetalhe = _servicoEmprestimo.GetEmprestimosById(id);
-        if (emprestimoDetalhe == null)
-            return BadRequest("Emprestimo não encontrado");
-        return View(emprestimoDetalhe);
     }
 }
