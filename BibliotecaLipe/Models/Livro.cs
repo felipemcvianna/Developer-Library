@@ -1,5 +1,5 @@
-﻿using Biblioteca.Models.Enums;
-using BibliotecaDev.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Biblioteca.Models.Enums;
 
 namespace Biblioteca.Models;
 
@@ -12,8 +12,8 @@ public class Livro
     public Categorias Categoria { get; set; }
     public DateTime DataPublicacao { get; set; }
     public string Descricao { get; set; }
-    public int QuantidadeEmprestado => Emprestimos.Count;
     public string? CaminhoImagem { get; set; }
     public ICollection<Emprestimo> Emprestimos { get; set; } = new List<Emprestimo>();
-    
+
+    [NotMapped] public int QuantidadeEmprestado => Emprestimos.Count;
 }

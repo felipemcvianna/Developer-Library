@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\Imagens\\845627b0davinci.jpg"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\89b2c7b7AculpaEstrelas.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\89b2c7b7AculpaEstrelas.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\8e86ff37Capa paulo coelho.jpg",
       "PackagePath": "staticwebassets\\Imagens\\8e86ff37Capa paulo coelho.jpg"
     },
@@ -33,8 +37,20 @@
       "PackagePath": "staticwebassets\\Imagens\\9466efbfGrandeSertão.jpg"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\95b62b47PequenoPrincipe.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\95b62b47PequenoPrincipe.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\9fa59124Sapiens.jpg",
       "PackagePath": "staticwebassets\\Imagens\\9fa59124Sapiens.jpg"
+    },
+    {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\b104c42bCapaHarryPotter.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\b104c42bCapaHarryPotter.jpg"
+    },
+    {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\b1a6764cSenhorDosAneis.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\b1a6764cSenhorDosAneis.jpg"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\db4256d1HistoriaTempo.jpg",
@@ -61,12 +77,16 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-Lux.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-Lux.css"
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\Flatly.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\Flatly.css"
     },
     {
-      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-fly.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-fly.css"
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-Lumen.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-Lumen.css"
+    },
+    {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-Lux.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-Lux.css"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",

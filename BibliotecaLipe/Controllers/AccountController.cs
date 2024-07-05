@@ -46,7 +46,7 @@ public class AccountController : Controller
                 };
                 _context.ListaDesejos.Add(listaDesejo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Livro");
             }
 
             foreach (var error in result.Errors)
@@ -85,7 +85,7 @@ public class AccountController : Controller
                     _context.ListaDesejos.Add(listaDesejo);
                     await _context.SaveChangesAsync();
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Livro");
             }
 
             ModelState.AddModelError(string.Empty, "Login inválido");

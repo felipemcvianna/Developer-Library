@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Biblioteca.Data;
+using Biblioteca.Models;
 using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
 using BibliotecaLipe.Models;
@@ -74,10 +75,8 @@ public class EmprestimoController : Controller
             ModelState.AddModelError(emprestimoViewModel.Emprestimo.DataDevolucao.ToString(),
                 "A data de devolução não pode ser anterior à data atual.");
         }
-
         emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
-        emprestimoViewModel.Emprestimo.Status = Status.Ativo;
-        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
+        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo); ;
         return RedirectToAction(nameof(Index));
     }
 

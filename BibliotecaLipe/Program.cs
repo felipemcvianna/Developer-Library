@@ -2,6 +2,7 @@ using Biblioteca.Data;
 using Biblioteca.Servico;
 using Biblioteca.Servico.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddScoped<ServicoLivros>();
 builder.Services.AddScoped<ServicoEmprestimo>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped<ServicoListaDesejo>();
+builder.Services.AddScoped<Logger<ServicoEmprestimo>>();
 
 var app = builder.Build();
 
@@ -39,7 +41,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Livro}/{action=Index}/{id?}");
 
 app.Run();
 

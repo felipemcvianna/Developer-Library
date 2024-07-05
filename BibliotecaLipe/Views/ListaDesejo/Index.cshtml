@@ -74,7 +74,7 @@
                     <div>ISBN: @livro.ISBN</div>
                 </div>
                 <div class="button-container ">
-                    <form asp-controller="Emprestimo" asp-action="Create" method="post">
+                    <form asp-controller="Emprestimo" asp-action="Create" method="get">
                         <input type="hidden" name="Livroid" value="@livro.LivroID">
                         <button type="submit" class="Pegar-button">Emprestimo</button>
                     </form>

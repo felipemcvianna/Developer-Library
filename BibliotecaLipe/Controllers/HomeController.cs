@@ -9,11 +9,10 @@ namespace BibliotecaDev.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
 
     public HomeController(SignInManager<IdentityUser> signInManager)
     {
-        _signInManager = signInManager;
+        
     }
 
     public IActionResult Index()

@@ -5,10 +5,10 @@ namespace Biblioteca.Models;
 
 public class LoginViewModel
 {
-    [Required(ErrorMessage = "Nome de usuário obrigatório")]
+    [Required(ErrorMessage = "O campo Usuário é obrigatório!")]
     public string? Nome { get; set; }
 
-    [Required(ErrorMessage = "Senha é obrigatória")]
+    [Required(ErrorMessage = "O campo Senha é obrigatório!")]
     [DataType(DataType.Password)]
     public string? Password { get; set; }
 

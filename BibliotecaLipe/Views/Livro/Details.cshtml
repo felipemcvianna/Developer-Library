@@ -40,8 +40,8 @@
     <div class="container col-md-6">
         <div class="row justify-content-center">
             <div class="card mb-3">
-                <div class=" d-flex justify-content-between align-items-center">
-                    <h1 class=" mx-auto">@Model.Titulo</h1>
+                <div class="pb-2 d-flex justify-content-between align-items-center">
+                    <h4 class=" mx-auto">@Model.Titulo</h4>
                 </div>
                 <div class="text-center">
                     <img src="@Model.CaminhoImagem" alt="Capa do Harry Potter" class="img-fluid py-2"
@@ -54,6 +54,7 @@
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item">Autor(a): @Model.Autor</li>
                     <li class="list-group-item">Data de publicação: @Model.DataPublicacao.ToString("d")</li>
+                    <li class="list-group-item">Categoria: @Model.Categoria</li>
                     <li class="list-group-item">ISBN: @Model.ISBN</li>
                 </ul>
                 <div class="card-body text-center">

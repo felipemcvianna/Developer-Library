@@ -2,9 +2,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<IdentityUser> SignInManager
 
+<style>
+    .btn-logout {
+        background-color: var(--bs-body-tertiary) !important;
+        color: var(--bs-body-color) !important; 
+        
+    }
+
+
+</style>
 @if (SignInManager.IsSignedIn(User))
 {
-    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-light"><i class="bi bi-box-arrow-right"></i></a>
+    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-logout"><i class="bi bi-box-arrow-right"></i></a>
 }
 else
 {

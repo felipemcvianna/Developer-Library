@@ -43,11 +43,11 @@
                                 <label asp-for="Emprestimo.DataDevolucao" class="form-label mt-4">Data de Devolução:</label>
                                 <input asp-for="Emprestimo.DataDevolucao" type="date" class="form-control" readonly="readonly"/>
                             </div>
+                            <div class="text-center mt-4">
+                                <a class="btn btn-primary" asp-controller="Livro" asp-action="Details" asp-route-id="@Model.Livro.LivroID"> Voltar</a>
+                                <button type="submit" class="btn btn-success">Confirmar</button>
+                            </div>
                         </form>
-                        <div class="text-center mt-4">
-                            <a class="btn btn-primary" asp-controller="Livro" asp-action="Details" asp-route-id="@Model.Livro.LivroID"> Voltar</a>
-                            <input type="submit" value="Confirmar emprestimo" class="btn btn-success">
-                        </div>
                     </div>
                 </div>
             </div>

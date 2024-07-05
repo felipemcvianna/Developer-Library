@@ -36,4 +36,10 @@
       <Compile Remove="Controllers\testeman.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="Views\Emprestimo\Delete.cshtml" />
+      <Content Remove="Views\Emprestimo\Details.cshtml" />
+      <Content Remove="Views\Emprestimo\Edit.cshtml" />
+    </ItemGroup>
+
 </Project>
