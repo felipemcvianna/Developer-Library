@@ -1,10 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<Biblioteca.Models.Livro>
 
+@functions {
+
+public static string Truncate(string value, int maxChars)
+{
+return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+}
+
+}
+
 <!DOCTYPE html>
 @{
-    ViewData["Title"] = "Livros";
-    var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
+ViewData["Title"] = "Livros";
+var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
 }
 <html>
 <head>
@@ -19,6 +28,21 @@
         .card-body img {
             object-fit: cover;
             height: 200px;
+            width: 70%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-item .row {
+            justify-content: center;
+        }
+
+        .carousel-item .col-md-2 {
+            flex: 0 0 18%;
+            max-width: 18%;
         }
     </style>
 </head>
@@ -38,29 +62,45 @@
 <div>
     <section class="py-5">
         <div class="container">
-            <div class="row text-center">
-                @foreach (var book in topLivros)
-                {
-                    <div class="col-md-2 mb-4">
-                        <div class="card h-100"
-                             onclick="location.href='@Url.Action("Details", "Livro", new { id = book.LivroID })'">
-                            <div class="card-body">
-                                <h5 class="card-title">@book.Titulo</h5>
-                                <img src="@book.CaminhoImagem" alt="Capa do livro" class="img-fluid py-2"
-                                     style="width: 70%; height: 200px;">
-                                <p class="card-text">Autor:</p>
-                                <p>@book.Autor</p>
+            <div id="carouselLivros" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @for (int i = 0; i < topLivros.Count(); i += 5)
+                    {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="row text-center">
+                            @foreach (var book in topLivros.Skip(i).Take(5))
+                            {
+                            <div class="col-md-2 mb-4">
+                                <div class="card h-100"
+                                     onclick="location.href='@Url.Action("Details", "Livro", new { id = book.LivroID })'">
+                                    <div class="card-body">
+                                        <h6 class="card-title">@Truncate(book.Titulo, 15)</h6>
+                                        <img src="@book.CaminhoImagem" alt="Capa do livro" class="img-fluid py-2">
+                                        <p class="card-text">Autor:</p>
+                                        <p>@book.Autor</p>
+                                    </div>
+                                </div>
                             </div>
+                            }
                         </div>
                     </div>
-                }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselLivros" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </section>
 </div>
 @if (User.IsInRole("Administrador"))
 {
-    <a class="btn btn-primary" asp-action="Create">Cadastrar</a>
+<a class="btn btn-primary" asp-action="Create">Cadastrar</a>
 }
 </body>
 </html>

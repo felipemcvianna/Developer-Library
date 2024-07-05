@@ -4,6 +4,7 @@ using Biblioteca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliotecaLipe.Migrations
 {
     [DbContext(typeof(BibliotecaDbContext))]
-    partial class BibliotecaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240704172843_RemoveListaLivros")]
+    partial class RemoveListaLivros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,18 +54,37 @@ namespace BibliotecaLipe.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ListaDesejoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("LivroID");
 
-                    b.HasIndex("ListaDesejoId");
-
                     b.ToTable("Livros");
+                });
+
+            modelBuilder.Entity("Carrinho", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Livroid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Livroid");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Carrinhos");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -106,11 +128,16 @@ namespace BibliotecaLipe.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Livroid")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsuarioId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Livroid");
 
                     b.HasIndex("UsuarioId");
 
@@ -313,11 +340,23 @@ namespace BibliotecaLipe.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Biblioteca.Models.Livro", b =>
+            modelBuilder.Entity("Carrinho", b =>
                 {
-                    b.HasOne("ListaDesejo", null)
-                        .WithMany("Livros")
-                        .HasForeignKey("ListaDesejoId");
+                    b.HasOne("Biblioteca.Models.Livro", "Livro")
+                        .WithMany()
+                        .HasForeignKey("Livroid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Livro");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -341,11 +380,19 @@ namespace BibliotecaLipe.Migrations
 
             modelBuilder.Entity("ListaDesejo", b =>
                 {
+                    b.HasOne("Biblioteca.Models.Livro", "Livro")
+                        .WithMany()
+                        .HasForeignKey("Livroid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Livro");
 
                     b.Navigation("Usuario");
                 });
@@ -404,11 +451,6 @@ namespace BibliotecaLipe.Migrations
             modelBuilder.Entity("Biblioteca.Models.Livro", b =>
                 {
                     b.Navigation("Emprestimos");
-                });
-
-            modelBuilder.Entity("ListaDesejo", b =>
-                {
-                    b.Navigation("Livros");
                 });
 #pragma warning restore 612, 618
         }

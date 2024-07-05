@@ -4,6 +4,7 @@ using Biblioteca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliotecaLipe.Migrations
 {
     [DbContext(typeof(BibliotecaDbContext))]
-    partial class BibliotecaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240704163140_CarrinhoListaDesejos")]
+    partial class CarrinhoListaDesejos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,9 @@ namespace BibliotecaLipe.Migrations
 
                     b.Property<string>("CaminhoImagem")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("CarrinhoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Categoria")
                         .HasColumnType("int");
@@ -60,9 +66,47 @@ namespace BibliotecaLipe.Migrations
 
                     b.HasKey("LivroID");
 
+                    b.HasIndex("CarrinhoId");
+
                     b.HasIndex("ListaDesejoId");
 
                     b.ToTable("Livros");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.Carrinho", b =>
+                {
+                    b.Property<int>("CarrinhoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CarrinhoId"));
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("CarrinhoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Carrinhos");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.ListaDesejo", b =>
+                {
+                    b.Property<int>("ListaDesejoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ListaDesejoId"));
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ListaDesejoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("ListaDesejos");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -96,25 +140,6 @@ namespace BibliotecaLipe.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Emprestimos");
-                });
-
-            modelBuilder.Entity("ListaDesejo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("ListaDesejos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -315,9 +340,31 @@ namespace BibliotecaLipe.Migrations
 
             modelBuilder.Entity("Biblioteca.Models.Livro", b =>
                 {
-                    b.HasOne("ListaDesejo", null)
+                    b.HasOne("BibliotecaLipe.Models.Carrinho", null)
+                        .WithMany("Livros")
+                        .HasForeignKey("CarrinhoId");
+
+                    b.HasOne("BibliotecaLipe.Models.ListaDesejo", null)
                         .WithMany("Livros")
                         .HasForeignKey("ListaDesejoId");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.Carrinho", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.ListaDesejo", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -335,17 +382,6 @@ namespace BibliotecaLipe.Migrations
                         .IsRequired();
 
                     b.Navigation("Livro");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("ListaDesejo", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
@@ -406,7 +442,12 @@ namespace BibliotecaLipe.Migrations
                     b.Navigation("Emprestimos");
                 });
 
-            modelBuilder.Entity("ListaDesejo", b =>
+            modelBuilder.Entity("BibliotecaLipe.Models.Carrinho", b =>
+                {
+                    b.Navigation("Livros");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.ListaDesejo", b =>
                 {
                     b.Navigation("Livros");
                 });

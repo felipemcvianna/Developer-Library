@@ -1,0 +1,58 @@
+﻿@model Biblioteca.Models.Livro
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar à Lista de Desejos</title>
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .card-body img {
+            object-fit: cover;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <form asp-action="Create" method="post">
+        <div class="center-content">
+            <div class="container col-md-6">
+                <div class="row justify-content-center">
+                    <div class="card mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h1 class="mx-auto">@Model.Titulo</h1>
+                        </div>
+                        <div class="text-center">
+                            <img src="@Model.CaminhoImagem" alt="Capa do Livro" class="img-fluid py-2" style="width: 40%; height: 400px;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Descrição</h5>
+                            <p>@Model.Descricao</p>
+                        </div>
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item">Autor(a): @Model.Autor</li>
+                            <li class="list-group-item">Data de publicação: @Model.DataPublicacao.ToString("d")</li>
+                            <li class="list-group-item">ISBN: @Model.ISBN</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a asp-controller="Livro" asp-action="Details" asp-route-id="@Model.LivroID" class="btn btn-primary">Voltar</a>
+                    <input type="submit" value="Confirmar " class="btn btn-success">
+                </div>
+            </div>
+            <br/>
+            <br/>
+        </div>
+    </form>
+    
+</div>
+</body>
+</html>

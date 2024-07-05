@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Biblioteca.Data;
-using Biblioteca.Models;
 using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
 using BibliotecaLipe.Models;
@@ -40,8 +39,7 @@ public class EmprestimoController : Controller
 
         return View(list);
     }
-
-
+    
     [HttpGet]
     public IActionResult Create(int livroId)
     {

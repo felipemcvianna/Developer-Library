@@ -8,18 +8,6 @@
 
 <head>
     <style>
-        .full-width-bg {
-            background-color: black;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-        }
-
         .full-width-bg h2 {
             color: white;
         }
@@ -32,12 +20,7 @@
             border: 5px solid #343a40;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        .text-container {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin-top: 20px;
-        }
+        
 
         .card {
             border: none;
@@ -74,8 +57,12 @@
                     <li class="list-group-item">ISBN: @Model.ISBN</li>
                 </ul>
                 <div class="card-body text-center">
-                    <i class="bi bi-cart4 p-2 btn"> Adicionar ao carrinho</i>
-                    <i class="bi bi-heart btn"> Adicionar a lista de desejo</i>
+                    <form asp-controller="ListaDesejo" asp-action="Create" method="post">
+                        <input type="hidden" name="livroId" value="@Model.LivroID" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-heart "></i> Adicionar a lista de desejo
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

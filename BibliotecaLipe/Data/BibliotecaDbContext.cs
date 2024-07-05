@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Models;
+using BibliotecaLipe.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,10 @@ namespace Biblioteca.Data
     {
         public BibliotecaDbContext(DbContextOptions<BibliotecaDbContext> options) : base(options)
         {
-            
         }
 
         public DbSet<Emprestimo> Emprestimos { get; set; }
         public DbSet<Livro> Livros { get; set; }
+        public DbSet<ListaDesejo> ListaDesejos { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Biblioteca.Models;
+﻿using Biblioteca.Data;
+using Biblioteca.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,15 @@ public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly BibliotecaDbContext _context;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, BibliotecaDbContext context)
     {
-        this._userManager = userManager;
-        this._signInManager = signInManager;
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _context = context;
     }
+    
     [HttpGet]
     public IActionResult Register()
     {
@@ -35,6 +39,13 @@ public class AccountController : Controller
             {
                 await _userManager.AddToRoleAsync(user, "Usuario");
                 await _signInManager.SignInAsync(user, isPersistent: false);
+                var listaDesejo = new ListaDesejo
+                {
+                    UsuarioId = user.Id,
+                    Usuario = user
+                };
+                _context.ListaDesejos.Add(listaDesejo);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
 
@@ -62,6 +73,18 @@ public class AccountController : Controller
             var result = await _signInManager.PasswordSignInAsync(model.Nome, model.Password, model.RemeberMe, false);
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByNameAsync(model.Nome);
+                var listaDesejo = _context.ListaDesejos.FirstOrDefault(x => x.UsuarioId == user.Id);
+                if (listaDesejo == null)
+                {
+                    listaDesejo = new ListaDesejo
+                    {
+                        UsuarioId = user.Id,
+                        Usuario = user
+                    };
+                    _context.ListaDesejos.Add(listaDesejo);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction("Index", "Home");
             }
 

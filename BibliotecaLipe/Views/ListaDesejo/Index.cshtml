@@ -1,0 +1,93 @@
+﻿@model ListaDesejo
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Desejos</title>
+    <style>
+        .wishlist-container {
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .wishlist-item {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
+        .wishlist-item img {
+            max-height: 150px;
+            margin-right: 1rem;
+        }
+        .wishlist-item-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .wishlist-item-author {
+            color: #6c757d;
+        }
+        .wishlist-item-details {
+            flex: 1;
+        }
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+        }
+        .Pegar-button {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wishlist-container container">
+    <div class="wishlist-header">
+        <h1>Lista de Desejos de @Model.Usuario.UserName</h1>
+    </div>
+    <div class="wishlist-items row">
+        @foreach (var livro in Model.Livros)
+        {
+            <div class="wishlist-item col-md-6 d-flex">
+                <img src="@livro.CaminhoImagem" alt="Capa do Livro">
+                <div class="wishlist-item-details">
+                    <div class="wishlist-item-title">@livro.Titulo</div>
+                    <div class="wishlist-item-author">por @livro.Autor</div>
+                    <div>Publicado em: @livro.DataPublicacao.ToString("dd/MM/yyyy")</div>
+                    <div>ISBN: @livro.ISBN</div>
+                </div>
+                <div class="button-container ">
+                    <form asp-controller="Emprestimo" asp-action="Create" method="post">
+                        <input type="hidden" name="Livroid" value="@livro.LivroID">
+                        <button type="submit" class="Pegar-button">Emprestimo</button>
+                    </form>
+                    
+                    <form asp-controller="ListaDesejo" asp-action="Remove" method="post">
+                        <input type="hidden" name="Livroid" value="@livro.LivroID">
+                        <button type="submit" class="remove-button mt-1">Remover</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+</body>
+</html>

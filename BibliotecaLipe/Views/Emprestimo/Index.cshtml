@@ -8,7 +8,19 @@
     <title>@ViewData["Title"]</title>
 </head>
 <body>
+<div class="py-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 class="text-center">Emprestimos</h2>
+    <div style="display: flex; align-items: center;">
+        <input type="text" placeholder="Pesquisar emprestimos..."
+               style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; width: 300px;">
+        <button
+            style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+</div>
 <div class="container mt-5">
+
     <div class="card">
         <div class="card-header bg-success">
             <h2 class="mb-0 text-center text-white">Emprestimos ativos</h2>

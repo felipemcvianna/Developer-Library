@@ -4,6 +4,7 @@ using Biblioteca.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliotecaLipe.Migrations
 {
     [DbContext(typeof(BibliotecaDbContext))]
-    partial class BibliotecaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240704164827_CarrinhosListalivros")]
+    partial class CarrinhosListalivros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,18 +54,78 @@ namespace BibliotecaLipe.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ListaDesejoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("LivroID");
 
+                    b.ToTable("Livros");
+                });
+
+            modelBuilder.Entity("BibliotecaLipe.Models.ListaDesejoLivro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ListaDesejoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("ListaDesejoId");
 
-                    b.ToTable("Livros");
+                    b.HasIndex("LivroId");
+
+                    b.ToTable("ListaDesejoLivros");
+                });
+
+            modelBuilder.Entity("Carrinho", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Carrinhos");
+                });
+
+            modelBuilder.Entity("CarrinhoLivro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarrinhoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LivroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarrinhoId");
+
+                    b.HasIndex("LivroId");
+
+                    b.ToTable("CarrinhoLivros");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -313,11 +376,53 @@ namespace BibliotecaLipe.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Biblioteca.Models.Livro", b =>
+            modelBuilder.Entity("BibliotecaLipe.Models.ListaDesejoLivro", b =>
                 {
-                    b.HasOne("ListaDesejo", null)
-                        .WithMany("Livros")
-                        .HasForeignKey("ListaDesejoId");
+                    b.HasOne("ListaDesejo", "ListaDesejo")
+                        .WithMany("ListaDesejoLivros")
+                        .HasForeignKey("ListaDesejoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Biblioteca.Models.Livro", "Livro")
+                        .WithMany()
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ListaDesejo");
+
+                    b.Navigation("Livro");
+                });
+
+            modelBuilder.Entity("Carrinho", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("CarrinhoLivro", b =>
+                {
+                    b.HasOne("Carrinho", "Carrinho")
+                        .WithMany("CarrinhoLivros")
+                        .HasForeignKey("CarrinhoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Biblioteca.Models.Livro", "Livro")
+                        .WithMany()
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carrinho");
+
+                    b.Navigation("Livro");
                 });
 
             modelBuilder.Entity("Emprestimo", b =>
@@ -406,9 +511,14 @@ namespace BibliotecaLipe.Migrations
                     b.Navigation("Emprestimos");
                 });
 
+            modelBuilder.Entity("Carrinho", b =>
+                {
+                    b.Navigation("CarrinhoLivros");
+                });
+
             modelBuilder.Entity("ListaDesejo", b =>
                 {
-                    b.Navigation("Livros");
+                    b.Navigation("ListaDesejoLivros");
                 });
 #pragma warning restore 612, 618
         }

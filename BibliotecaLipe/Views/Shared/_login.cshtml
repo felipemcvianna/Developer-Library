@@ -4,10 +4,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a asp-controller="Home" asp-action="Index" class="nav-item btn btn-light">
-        Olá @User.Identity.Name
-    </a>
-    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-light">Logout</a>
+    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-light"><i class="bi bi-box-arrow-right"></i></a>
 }
 else
 {
