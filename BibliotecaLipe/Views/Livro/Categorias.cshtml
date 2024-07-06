@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<Biblioteca.Models.Livro>
 
+
 @functions {
 
     public static string Truncate(string value, int maxChars)
@@ -13,7 +14,6 @@
 
 <!DOCTYPE html>
 @{
-    ViewData["Title"] = "Livros";
     var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
 }
 <html>
@@ -54,7 +54,7 @@
         </button>
     </div>
 </div>
-<h3 class="text-center">TOP 10 LIVROS</h3>
+<h3 class="text-center">TOP 10 LIVROS DE @ViewBag.Categoria</h3>
 <div>
     <section class="py-5">
         <div class="container">
@@ -82,18 +82,22 @@
                         </div>
                     }
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselLivros" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                @if (Model.Count() >=5)
+                {
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselLivros" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                }
             </div>
         </div>
     </section>
 </div>
+
 @if (User.IsInRole("Administrador"))
 {
     <a class="btn btn-primary" asp-action="Create">Cadastrar</a>

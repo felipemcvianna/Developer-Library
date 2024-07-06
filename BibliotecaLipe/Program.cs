@@ -1,3 +1,4 @@
+using Biblioteca.Controllers;
 using Biblioteca.Data;
 using Biblioteca.Servico;
 using Biblioteca.Servico.Interfaces;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<ServicoEmprestimo>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped<ServicoListaDesejo>();
 builder.Services.AddScoped<Logger<ServicoEmprestimo>>();
+builder.Services.AddScoped<Logger<ServicoLivros>>();
 
 var app = builder.Build();
 

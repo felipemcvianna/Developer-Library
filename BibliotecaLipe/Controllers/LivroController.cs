@@ -1,4 +1,5 @@
 using Biblioteca.Models;
+using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +11,14 @@ namespace Biblioteca.Controllers
     {
         private readonly ServicoLivros _servicoLivros;
         private readonly string _caminhoServidor;
-
+        
         public LivroController(ServicoLivros servicoLivros, IWebHostEnvironment servidor)
         {
             _servicoLivros = servicoLivros;
+            
             _caminhoServidor = servidor.WebRootPath;
         }
-        
+
         public IActionResult Index()
         {
             var todosOsLivros = _servicoLivros.GetAllLivros();
@@ -28,7 +30,7 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         [Authorize(Roles = "Administrador")]
         public IActionResult Create(Livro livro, IFormFile? imagem)
@@ -42,6 +44,7 @@ namespace Biblioteca.Controllers
 
             return View();
         }
+
         [HttpGet]
         [Authorize(Roles = "Administrador")]
         public IActionResult Edit(int? id)
@@ -68,7 +71,7 @@ namespace Biblioteca.Controllers
                     {
                         return NotFound("Livro não encontrado.");
                     }
-                    
+
                     livroExistente.Titulo = livro.Titulo;
                     livroExistente.Autor = livro.Autor;
                     livroExistente.ISBN = livro.ISBN;
@@ -94,9 +97,6 @@ namespace Biblioteca.Controllers
             return View(livro);
         }
 
-
-
-        
         [HttpGet]
         [Authorize(Roles = "Administrador")]
         public IActionResult Delete(int? id)
@@ -130,7 +130,32 @@ namespace Biblioteca.Controllers
 
             return BadRequest("Livro não encontrado");
         }
+        [HttpGet("cat: Categorias")]
+        public IActionResult Categorias(Categorias cat)
+        {
+            if (cat == null)
+            {
+                Console.WriteLine("Categoria recebida é nula.");
+                return BadRequest("Categoria não pode ser nula.");
+            }
 
+            Console.WriteLine($"Categoria passada no controlador é {cat}");
+            ViewBag.Categoria = cat;
+            var livros = _servicoLivros.ListCategories(cat);
+            if (livros.Count == 0)
+            {
+                Console.WriteLine($"A lista de livros da categoria {cat} está vazia.");
+            }
+            else
+            {
+                foreach (var livro in livros)
+                {
+                    Console.WriteLine($"Livro encontrado: {livro.Titulo}");
+                }
+            }
+            return View(livros);
+        }
+        
         private void CreateImg(Livro livro, IFormFile? imagem)
         {
             string caminhoParaSalvarImg = Path.Combine(_caminhoServidor, "Imagens");

@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Data;
 using Biblioteca.Models;
+using Biblioteca.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Servico;
@@ -7,10 +8,12 @@ namespace Biblioteca.Servico;
 public class ServicoLivros
 {
     private readonly BibliotecaDbContext _context;
+    private readonly Logger<ServicoLivros> _logger;
 
-    public ServicoLivros(BibliotecaDbContext context)
+    public ServicoLivros(BibliotecaDbContext context, Logger<ServicoLivros> logger)
     {
         this._context = context;
+        _logger = logger;
     }
 
     public IList<Livro> GetAllLivros()
@@ -54,6 +57,13 @@ public class ServicoLivros
             _context.SaveChanges();
         }
     }
+
+    public List<Livro> ListCategories(Categorias categoria)
+    {
+        _logger.LogInformation($"A categoria passada no serviço é {categoria}");
+        return _context.Livros.Where(x => x.Categoria == categoria).ToList();
+    }
+
 
     private bool LivroExist(int id)
     {
