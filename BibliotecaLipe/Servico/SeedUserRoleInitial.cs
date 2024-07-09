@@ -62,5 +62,22 @@ public class SeedUserRoleInitial : ISeedUserRoleInitial
                 await _userManager.AddToRoleAsync(user, "Administrador");
             }
         }
+
+        if (await _userManager.FindByEmailAsync("convidado@convidado.com") == null)
+        {
+            IdentityUser user = new IdentityUser();
+            user.UserName = "Convidado";
+            user.NormalizedUserName = "CONVIDADO";
+            user.Email = "convidado@convidado.com";
+            user.NormalizedEmail = "CONVIDADO@CONVIDADO.COM";
+            user.EmailConfirmed = false;
+            user.LockoutEnabled = false;
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            IdentityResult result = await _userManager.CreateAsync(user, "Convidado#1");
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Convidado");
+            }
+        }
     }
 }

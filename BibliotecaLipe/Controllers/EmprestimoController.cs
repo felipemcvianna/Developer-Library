@@ -15,13 +15,15 @@ public class EmprestimoController : Controller
     private readonly ServicoEmprestimo _servicoEmprestimo;
     private readonly BibliotecaDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<IdentityUser> _signInManager;
 
     public EmprestimoController(ServicoEmprestimo servicoEmprestimo, BibliotecaDbContext context,
-        UserManager<IdentityUser> userManager)
+        UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
     {
         _servicoEmprestimo = servicoEmprestimo;
         _context = context;
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     [HttpGet]
@@ -68,15 +70,24 @@ public class EmprestimoController : Controller
         {
             return Challenge();
         }
-        if (emprestimoViewModel.Emprestimo.DataDevolucao < DateTime.Today)
+    
+        if (User.IsInRole("Usuario") || User.IsInRole("Administrador"))
         {
-            ModelState.AddModelError(emprestimoViewModel.Emprestimo.DataDevolucao.ToString(),
-                "A data de devolução não pode ser anterior à data atual.");
+            if (emprestimoViewModel.Emprestimo.DataDevolucao < DateTime.Today)
+            {
+                ModelState.AddModelError(emprestimoViewModel.Emprestimo.DataDevolucao.ToString(),
+                    "A data de devolução não pode ser anterior à data atual.");
+            }
+    
+            emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
+            _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
+            return RedirectToAction(nameof(Index));
         }
-        emprestimoViewModel.Emprestimo.UsuarioId = user.Id;
-        _servicoEmprestimo.Create(emprestimoViewModel.Emprestimo);
-        return RedirectToAction(nameof(Index));
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Register", "Account");
     }
+
+
 
     [HttpGet]
     public async Task<IActionResult> Details(string searchString)

@@ -13,10 +13,15 @@
 </style>
 @if (SignInManager.IsSignedIn(User))
 {
-    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-logout"><i class="bi bi-box-arrow-right"></i></a>
+    <a asp-controller="Account" asp-action="Logout" class="nav-item btn btn-logout">
+        <i class="bi bi-box-arrow-right"></i>
+    </a>
 }
 else
 {
-    <a asp-controller="Account" asp-action="Register" class="nav-item btn btn-light">Registrar</a>
-    <a asp-controller="Account" asp-action="Login" class="nav-item btn btn-light">Login</a>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <a asp-controller="Account" asp-action="Register" class="nav-item">Registrar</a>
+        <a asp-controller="Account" asp-action="Login" class="nav-item ">Login</a>
+        <a asp-controller="Account" asp-action="LoginDemo" class="nav-item ">Convidado</a>
+    </div>
 }

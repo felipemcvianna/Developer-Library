@@ -51,10 +51,10 @@ public class ServicoListaDesejo
             return;
         }
 
-        var LivroARemover = listaDesejo.Livros.FirstOrDefault(x => x.LivroID == livroId);
-        if (LivroARemover != null)
+        var livroARemover = listaDesejo.Livros.FirstOrDefault(x => x.LivroID == livroId);
+        if (livroARemover != null)
         {
-            listaDesejo.Livros.Remove(LivroARemover);
+            listaDesejo.Livros.Remove(livroARemover);
             Update(listaDesejo);
         }
     }
