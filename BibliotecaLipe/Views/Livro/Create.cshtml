@@ -1,5 +1,6 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Biblioteca.Models.Livro
+﻿@using BibliotecaLipe.Models.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BibliotecaLipe.Models.Livro
 @{
     ViewData["Title"] = "Criar";
 }
@@ -29,7 +30,7 @@
         <div>
             <label asp-for="Categoria" class="form-label mt-4">Categorias</label>
             <select class="form-select" asp-for="Categoria">
-                @foreach (var categoria in Enum.GetValues(typeof(Biblioteca.Models.Enums.Categorias)))
+                @foreach (var categoria in Enum.GetValues(typeof(Categorias)))
                 {
                     <option value="@categoria">@categoria</option>
                 }

@@ -1,4 +1,4 @@
-﻿@using Biblioteca.Models.Enums
+﻿@using BibliotecaLipe.Models.Enums
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<IdentityUser> SignInManager
@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Biblioteca</title>
+    <link rel="icon" type="image/x-icon" href="~/Icone.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-Lux.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/BibliotecaLipe.styles.css" asp-append-version="true"/>
@@ -88,6 +88,11 @@
                             </ul>
                         </li>
                     }
+                    <li class="nav-item">
+                        <a class="nav-link text-black" href="@Url.Action("About", "Home")">
+                            Sobre
+                        </a>
+                    </li>
                 </ul>
                 <div class="d-flex">
                     <partial name="_login.cshtml"/>
@@ -105,7 +110,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2024 - Biblioteca - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2024 - Biblioteca
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

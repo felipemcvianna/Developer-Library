@@ -1,8 +1,19 @@
 ﻿@model ListaDesejo
+@functions {
 
+public static string Truncate(string value, int maxChars)
+{
+return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+}
+
+
+}
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lista de Desejos</title>
@@ -68,7 +79,7 @@
             <div class="wishlist-item col-md-4 d-flex">
                 <img src="@livro.CaminhoImagem" alt="Capa do Livro">
                 <div class="wishlist-item-details">
-                    <div class="wishlist-item-title">@livro.Titulo</div>
+                    <div class="wishlist-item-title">@Truncate(livro.Titulo, 17)</div>
                     <div class="wishlist-item-author">por @livro.Autor</div>
                     <div>Publicado em: @livro.DataPublicacao.ToString("dd/MM/yyyy")</div>
                     <div>ISBN: @livro.ISBN</div>

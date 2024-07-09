@@ -1,5 +1,5 @@
-﻿using Biblioteca.Models;
-using Biblioteca.Models.Enums;
+﻿using BibliotecaLipe.Models;
+using BibliotecaLipe.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 
 public class Emprestimo

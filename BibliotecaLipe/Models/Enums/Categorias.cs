@@ -1,4 +1,4 @@
-﻿namespace Biblioteca.Models.Enums;
+﻿namespace BibliotecaLipe.Models.Enums;
 
 public enum Categorias
 {

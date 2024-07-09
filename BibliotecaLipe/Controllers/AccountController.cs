@@ -3,7 +3,7 @@ using Biblioteca.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Biblioteca.Controllers;
+namespace BibliotecaLipe.Controllers;
 
 public class AccountController : Controller
 {

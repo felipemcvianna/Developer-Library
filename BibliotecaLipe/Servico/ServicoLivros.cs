@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Data;
 using Biblioteca.Models;
-using Biblioteca.Models.Enums;
+using BibliotecaLipe.Models;
+using BibliotecaLipe.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Servico;
@@ -12,7 +13,7 @@ public class ServicoLivros
 
     public ServicoLivros(BibliotecaDbContext context, Logger<ServicoLivros> logger)
     {
-        this._context = context;
+        _context = context;
         _logger = logger;
     }
 
@@ -21,17 +22,26 @@ public class ServicoLivros
         return _context.Livros.Include(x => x.Emprestimos).ToList();
     }
 
-    public Livro GetLivroById(int id)
+    public Livro? GetLivroById(int id)
     {
         return _context.Livros.FirstOrDefault(x => x.LivroID == id);
+    }
+
+    public List<Livro> GetLivroByTitulo(string titulo)
+    {
+        if (String.IsNullOrEmpty(titulo))
+        {
+            Console.WriteLine("String vazia");
+        }
+        return _context.Livros.Where(x => x.Titulo.StartsWith(titulo) || x.Autor.StartsWith(titulo)).ToList();
     }
 
     public void Create(Livro livro)
     {
         if (!_context.Livros.Any(x => x.LivroID == livro.LivroID))
         {
-                _context.Livros.Add(livro);
-                _context.SaveChanges();
+            _context.Livros.Add(livro);
+            _context.SaveChanges();
         }
     }
 

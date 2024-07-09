@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Biblioteca.Models.Livro>
+@model IEnumerable<BibliotecaLipe.Models.Livro>
 
 @functions {
 
@@ -7,18 +7,15 @@
     {
         return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
     }
-    
-
 }
 
 <!DOCTYPE html>
 @{
-    ViewData["Title"] = "Livros";
     var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
 }
 <html>
 <head>
-    <title>@ViewData["Title"]</title>
+    <title>Livros</title>
     <style>
         .card {
             border: none;
@@ -45,21 +42,25 @@
 <body>
 <div class="py-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
     <h2 class="text-center">LIVROS</h2>
-    <div style="display: flex; align-items: center;">
-        <input type="text" placeholder="Pesquisar emprestimos..."
+    <form style="display: flex; align-items: center;" asp-action="Pesquisa" method="get">
+        <input type="text" name="searchString" placeholder="Pesquisar livros..."
                style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
         <button
-            style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
+            type="submit" style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
             <i class="bi bi-search"></i>
         </button>
-    </div>
+    </form>
 </div>
-<h3 class="text-center">TOP 10 LIVROS</h3>
 <div>
     <section class="py-5">
         <div class="container">
             <div id="carouselLivros" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
+                    <h3 class="text-center">TOP 10 LIVROS DA SEMANA</h3>
+                    @if (!Model.Any())
+                    {
+                        <p class="text-center">Nenhum livro encontrado</p>
+                    }
                     @for (int i = 0; i < topLivros.Count(); i += 5)
                     {
                         <div class="carousel-item @(i == 0 ? "active" : "")">
@@ -80,16 +81,18 @@
                                 }
                             </div>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselLivros" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     }
+
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselLivros" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
             </div>
         </div>
     </section>

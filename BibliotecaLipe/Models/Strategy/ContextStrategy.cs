@@ -1,5 +1,4 @@
-﻿using Biblioteca.Models;
-using Biblioteca.Models.Enums;
+﻿using BibliotecaLipe.Models.Enums;
 
 namespace BibliotecaLipe.Models.Strategy;
 

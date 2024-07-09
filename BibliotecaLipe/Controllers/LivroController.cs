@@ -1,21 +1,20 @@
-using Biblioteca.Models;
-using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
+using BibliotecaLipe.Models;
+using BibliotecaLipe.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Biblioteca.Controllers
+namespace BibliotecaLipe.Controllers
 {
     [Authorize]
     public class LivroController : Controller
     {
         private readonly ServicoLivros _servicoLivros;
         private readonly string _caminhoServidor;
-        
+
         public LivroController(ServicoLivros servicoLivros, IWebHostEnvironment servidor)
         {
             _servicoLivros = servicoLivros;
-            
             _caminhoServidor = servidor.WebRootPath;
         }
 
@@ -23,6 +22,13 @@ namespace Biblioteca.Controllers
         {
             var todosOsLivros = _servicoLivros.GetAllLivros();
             return View(todosOsLivros);
+        }
+
+        [HttpGet]
+        public IActionResult Pesquisa(string searchString)
+        {
+            var livro = _servicoLivros.GetLivroByTitulo(searchString);
+            return View("Index", livro);
         }
 
         [Authorize(Roles = "Administrador")]
@@ -130,6 +136,7 @@ namespace Biblioteca.Controllers
 
             return BadRequest("Livro não encontrado");
         }
+
         [HttpGet("cat: Categorias")]
         public IActionResult Categorias(Categorias cat)
         {
@@ -138,24 +145,32 @@ namespace Biblioteca.Controllers
                 Console.WriteLine("Categoria recebida é nula.");
                 return BadRequest("Categoria não pode ser nula.");
             }
-
-            Console.WriteLine($"Categoria passada no controlador é {cat}");
             ViewBag.Categoria = cat;
             var livros = _servicoLivros.ListCategories(cat);
             if (livros.Count == 0)
             {
                 Console.WriteLine($"A lista de livros da categoria {cat} está vazia.");
             }
-            else
-            {
-                foreach (var livro in livros)
-                {
-                    Console.WriteLine($"Livro encontrado: {livro.Titulo}");
-                }
-            }
+
             return View(livros);
         }
-        
+
+        [HttpGet]
+        public IActionResult PesquisaCategoria(string searchString, Categorias categoria)
+        {
+            Console.WriteLine($"Categoria que chegou ao controlador {categoria}");
+            var livros = _servicoLivros.ListCategories(categoria);
+            Console.WriteLine($"Tamanho de livros que corresponde a categoria {categoria}: {livros.Count}");
+            if (livros.Count == 0)
+            {
+                return BadRequest($"Não foi possível encontrar livros com a categoria {categoria}");
+            }
+
+            var livrosCorrespondentes =
+                livros.Where(x => x.Titulo.StartsWith(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            return View("Categorias", livrosCorrespondentes);
+        }
+
         private void CreateImg(Livro livro, IFormFile? imagem)
         {
             string caminhoParaSalvarImg = Path.Combine(_caminhoServidor, "Imagens");

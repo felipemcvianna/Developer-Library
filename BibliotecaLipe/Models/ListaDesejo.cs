@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Models;
+using BibliotecaLipe.Models;
 using Microsoft.AspNetCore.Identity;
 
 public class ListaDesejo

@@ -2,34 +2,44 @@
 @model Biblioteca.Models.RegisterViewModel
 
 
-<div class="mx-auto py-4 w-25 row">
-    <div class="col-md-12 border border-0  border-dark"></div>
-    <h3>Registrar Usuário</h3>
-    <form asp-action="Register" method="post">
-        <div class="form-group">
-            <label asp-for="Nome">Usuário</label>
-            <input asp-for="Nome" type="tel" class="form-control">
-            <span asp-validation-for="Nome" class="text-danger"></span>
-        </div>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <h3 class="card-header text-center">Registrar Usuário</h3>
+                <div class="card-body">
+                    <form asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Nome" class="form-label">Usuário</label>
+                            <input asp-for="Nome" type="text" class="form-control" required placeholder="Digite o nome de usuario...">
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" required placeholder="Digite o email...">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
         
-        <div class="form-group">
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" type="email" class="form-control">
-            <span asp-validation-for="Email" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Senha</label>
+                            <input asp-for="Password" type="password" class="form-control" required placeholder="Digite a senha...">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="ConfirmaPassword" class="form-label">Confirmar Senha</label>
+                            <input asp-for="ConfirmaPassword" type="password" class="form-control" required placeholder="Confirme a senha...">
+                            <span asp-validation-for="ConfirmaPassword" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Registrar-se</button>
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-success">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label asp-for="Password">Senha</label>
-            <input asp-for="Password" type="password" class="form-control">
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        
-        <div class="form-group">
-            <label asp-for="ConfirmaPassword" class="form-label mt-4">@Html.DisplayNameFor(x => x.ConfirmaPassword)</label>
-            <input asp-for="ConfirmaPassword" type="password" class="form-control">
-            <span asp-validation-for="ConfirmaPassword" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Registrar-se</button>
-        <a asp-controller="Account" asp-action="Login" class="btn btn-success mt-3">Login</a>
-    </form>
+    </div>
 </div>

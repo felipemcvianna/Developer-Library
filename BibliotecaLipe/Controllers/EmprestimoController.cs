@@ -1,14 +1,13 @@
 ﻿using System.Security.Claims;
 using Biblioteca.Data;
-using Biblioteca.Models;
-using Biblioteca.Models.Enums;
 using Biblioteca.Servico;
 using BibliotecaLipe.Models;
+using BibliotecaLipe.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Biblioteca.Controllers;
+namespace BibliotecaLipe.Controllers;
 
 [Authorize]
 public class EmprestimoController : Controller
@@ -79,7 +78,18 @@ public class EmprestimoController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Details(string searchString)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user != null)
+        {
+            var listEmprestimo = _servicoEmprestimo.GetEmprestimosByLivro(user.Id, searchString);
+            return View(listEmprestimo);
+        }
 
+        return BadRequest();
+    }
     [HttpPost]
     public IActionResult Edit(int id)
     {

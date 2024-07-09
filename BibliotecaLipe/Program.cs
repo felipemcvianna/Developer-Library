@@ -1,9 +1,7 @@
-using Biblioteca.Controllers;
 using Biblioteca.Data;
 using Biblioteca.Servico;
 using Biblioteca.Servico.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

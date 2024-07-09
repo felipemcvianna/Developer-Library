@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Biblioteca.Models.Livro>
+@model IEnumerable<BibliotecaLipe.Models.Livro>
 
 
 @functions {
@@ -8,13 +8,18 @@
     {
         return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
     }
-    
+
 
 }
 
 <!DOCTYPE html>
 @{
     var topLivros = Model.OrderByDescending(l => l.QuantidadeEmprestado).Take(10);
+    if (topLivros.Any())
+    {
+        var livro = topLivros.First();
+        ViewBag.Categoria = livro.Categoria;
+    }
 }
 <html>
 <head>
@@ -45,21 +50,27 @@
 <body>
 <div class="py-2" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
     <h2 class="text-center">LIVROS</h2>
-    <div style="display: flex; align-items: center;">
-        <input type="text" placeholder="Pesquisar emprestimos..."
+    <form style="display: flex; align-items: center;" asp-action="PesquisaCategoria" method="get">
+        <input type="text" name="searchString" placeholder="Pesquisar por @ViewBag.Categoria..."
                style="padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
+        <input type="hidden" name="categoria" value="@ViewBag.Categoria"/>
         <button
-            style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
+            type="submit" style="padding: 8px 16px; margin-left: 8px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px;">
             <i class="bi bi-search"></i>
         </button>
-    </div>
+    </form>
+
 </div>
-<h3 class="text-center">TOP 10 LIVROS DE @ViewBag.Categoria</h3>
 <div>
+    <h3 class="text-center">TOP 10 LIVROS DE @ViewBag.Categoria</h3>
     <section class="py-5">
         <div class="container">
             <div id="carouselLivros" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
+                    @if (!Model.Any())
+                    {
+                        <p class="text-center">NENHUM LIVRO ENCONTRADO NESSA CATEGORIA</p>
+                    }
                     @for (int i = 0; i < topLivros.Count(); i += 5)
                     {
                         <div class="carousel-item @(i == 0 ? "active" : "")">
@@ -82,7 +93,7 @@
                         </div>
                     }
                 </div>
-                @if (Model.Count() >=5)
+                @if (Model.Count() >= 5)
                 {
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselLivros" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

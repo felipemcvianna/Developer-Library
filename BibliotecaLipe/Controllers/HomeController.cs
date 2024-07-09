@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BibliotecaDev.Controllers;
+namespace BibliotecaLipe.Controllers;
 
-[Authorize]
 public class HomeController : Controller
 {
 
@@ -14,16 +13,11 @@ public class HomeController : Controller
     {
         
     }
-
-    public IActionResult Index()
+    public IActionResult About()
     {
         return View();
     }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

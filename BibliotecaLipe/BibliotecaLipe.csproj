@@ -11,7 +11,6 @@
       <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -34,12 +33,21 @@
     <ItemGroup>
       <Compile Remove="Controllers\teste.cs" />
       <Compile Remove="Controllers\testeman.cs" />
+      <Compile Remove="Models\Strategy\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Views\Emprestimo\Delete.cshtml" />
-      <Content Remove="Views\Emprestimo\Details.cshtml" />
       <Content Remove="Views\Emprestimo\Edit.cshtml" />
+      <Content Remove="Models\Strategy\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Models\Strategy\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Models\Strategy\**" />
     </ItemGroup>
 
 </Project>

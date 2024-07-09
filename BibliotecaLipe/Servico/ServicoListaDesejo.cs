@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Data;
 using Biblioteca.Models;
+using BibliotecaLipe.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Servico;

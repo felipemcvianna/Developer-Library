@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\BibliotecaLipe.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Icone.ico",
+      "PackagePath": "staticwebassets\\Icone.ico"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\02ca0121CapaHarryPotter.jpg",
       "PackagePath": "staticwebassets\\Imagens\\02ca0121CapaHarryPotter.jpg"
     },
@@ -13,12 +17,24 @@
       "PackagePath": "staticwebassets\\Imagens\\1a4d98b4Taça raiz.png"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\34acd644Steve.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\34acd644Steve.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\38043378DomCasmurro.jpg",
       "PackagePath": "staticwebassets\\Imagens\\38043378DomCasmurro.jpg"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\40bf583fCosmos.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\40bf583fCosmos.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\64601451CapaHarryPotter.jpg",
       "PackagePath": "staticwebassets\\Imagens\\64601451CapaHarryPotter.jpg"
+    },
+    {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\817c2b1ebourne.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\817c2b1ebourne.jpg"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\845627b0davinci.jpg",
@@ -33,6 +49,10 @@
       "PackagePath": "staticwebassets\\Imagens\\8e86ff37Capa paulo coelho.jpg"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\92f037091941.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\92f037091941.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\9466efbfGrandeSertão.jpg",
       "PackagePath": "staticwebassets\\Imagens\\9466efbfGrandeSertão.jpg"
     },
@@ -43,6 +63,10 @@
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\9fa59124Sapiens.jpg",
       "PackagePath": "staticwebassets\\Imagens\\9fa59124Sapiens.jpg"
+    },
+    {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\adc15ef6peakpx.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\adc15ef6peakpx.jpg"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\b104c42bCapaHarryPotter.jpg",
@@ -57,16 +81,16 @@
       "PackagePath": "staticwebassets\\Imagens\\db4256d1HistoriaTempo.jpg"
     },
     {
+      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\eu.jpg",
+      "PackagePath": "staticwebassets\\Imagens\\eu.jpg"
+    },
+    {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\fc36d836diagrama_de_classes.png",
       "PackagePath": "staticwebassets\\Imagens\\fc36d836diagrama_de_classes.png"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
       "Id": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\js\\site.js",

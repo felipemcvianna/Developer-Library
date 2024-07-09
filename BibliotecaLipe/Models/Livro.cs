@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Biblioteca.Models.Enums;
+using BibliotecaLipe.Models.Enums;
 
-namespace Biblioteca.Models;
+namespace BibliotecaLipe.Models;
 
 public class Livro
 {

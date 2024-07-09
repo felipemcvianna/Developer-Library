@@ -1,6 +1,7 @@
-﻿using Biblioteca.Data;
+﻿using System.Collections;
+using Biblioteca.Data;
 using Biblioteca.Models;
-using Biblioteca.Models.Enums;
+using BibliotecaLipe.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace Biblioteca.Servico;
 public class ServicoEmprestimo
 {
     private readonly BibliotecaDbContext _context;
+
     public ServicoEmprestimo(BibliotecaDbContext context, Logger<ServicoEmprestimo> logger)
     {
         _context = context;
@@ -27,6 +29,15 @@ public class ServicoEmprestimo
             .Include(x => x.Usuario)
             .Include(x => x.Livro)
             .FirstOrDefault(x => x.EmprestimoId == id);
+    }
+
+    public IList<Emprestimo> GetEmprestimosByLivro(string idUsuario, string titulo)
+    {
+        return _context.Emprestimos.Include(x => x.Livro)
+            .Include(x => x.Usuario)
+            .Where(x =>
+            x.UsuarioId == idUsuario &&
+            x.Livro.Titulo.StartsWith(titulo)).ToList();
     }
 
     public void Create(Emprestimo emprestimo)
@@ -48,7 +59,7 @@ public class ServicoEmprestimo
                 if (emprestimoExistente.Status != Status.Ativo && emprestimoExistente.Status != Status.Vencido)
                 {
                     emprestimoExistente.Status = Status.Ativo;
-                    _context.SaveChanges(); 
+                    _context.SaveChanges();
                     return;
                 }
             }
@@ -65,6 +76,7 @@ public class ServicoEmprestimo
             _context.SaveChanges();
         }
     }
+
     private void TrocarStatus(Emprestimo emprestimo)
     {
         if (emprestimo.Status == Status.Ativo || emprestimo.Status == Status.Vencido)

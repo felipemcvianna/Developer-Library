@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LGsm3erXub6bHrEstkvwMwH166VfI0TBY3MEgNHi9fY=",
+  "Hash": "vSN6htxPdPGLuMKXQ7r0XxLsPaexh9jnJtpB5B2vifM=",
   "Source": "BibliotecaLipe",
   "BasePath": "_content/BibliotecaLipe",
   "Mode": "Default",
@@ -74,12 +74,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Icone.ico",
       "SourceId": "BibliotecaLipe",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
       "BasePath": "_content/BibliotecaLipe",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "Icone.ico",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\Icone.ico"
     },
     {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\02ca0121CapaHarryPotter.jpg",
@@ -131,6 +131,25 @@
       "OriginalItemSpec": "wwwroot\\Imagens\\1a4d98b4Taça raiz.png"
     },
     {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\34acd644Steve.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/34acd644Steve.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\34acd644Steve.jpg"
+    },
+    {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\38043378DomCasmurro.jpg",
       "SourceId": "BibliotecaLipe",
       "SourceType": "Discovered",
@@ -150,6 +169,25 @@
       "OriginalItemSpec": "wwwroot\\Imagens\\38043378DomCasmurro.jpg"
     },
     {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\40bf583fCosmos.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/40bf583fCosmos.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\40bf583fCosmos.jpg"
+    },
+    {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\64601451CapaHarryPotter.jpg",
       "SourceId": "BibliotecaLipe",
       "SourceType": "Discovered",
@@ -167,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Imagens\\64601451CapaHarryPotter.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\817c2b1ebourne.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/817c2b1ebourne.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\817c2b1ebourne.jpg"
     },
     {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\845627b0davinci.jpg",
@@ -226,6 +283,25 @@
       "OriginalItemSpec": "wwwroot\\Imagens\\8e86ff37Capa paulo coelho.jpg"
     },
     {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\92f037091941.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/92f037091941.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\92f037091941.jpg"
+    },
+    {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\9466efbfGrandeSertão.jpg",
       "SourceId": "BibliotecaLipe",
       "SourceType": "Discovered",
@@ -283,6 +359,25 @@
       "OriginalItemSpec": "wwwroot\\Imagens\\9fa59124Sapiens.jpg"
     },
     {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\adc15ef6peakpx.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/adc15ef6peakpx.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\adc15ef6peakpx.jpg"
+    },
+    {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\b104c42bCapaHarryPotter.jpg",
       "SourceId": "BibliotecaLipe",
       "SourceType": "Discovered",
@@ -338,6 +433,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Imagens\\db4256d1HistoriaTempo.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\eu.jpg",
+      "SourceId": "BibliotecaLipe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\",
+      "BasePath": "_content/BibliotecaLipe",
+      "RelativePath": "Imagens/eu.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Imagens\\eu.jpg"
     },
     {
       "Identity": "C:\\Users\\felipe.dev\\Desktop\\BibliotecaLipe\\BibliotecaLipe\\wwwroot\\Imagens\\fc36d836diagrama_de_classes.png",
